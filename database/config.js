@@ -368,6 +368,21 @@ db.knex.schema.hasTable("bank_info").then(function(exists) {
 });
 
 
+//updations
+db.knex.schema.hasTable("question").then(function(exists) {
+  if (!exists) {
+    db.knex.schema
+      .createTable("question", function(rest) {
+        rest.increments("id_question").primary();
+        rest.string("question", 2500);
+      })
+      .then(function(table) {
+        console.log(`${table} created`);
+      });
+  }
+});
+
+
 // Comment it cause i have a special mysql compose key on it 
 // db.knex.schema.hasTable("opening_times").then(function(exists) {
 //   if (!exists) {

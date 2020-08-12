@@ -51,7 +51,7 @@ exports.updateOrder = (req, res) => {
     else {
       res.status(400).send({message: "can't return list orders"})
     }
-  })
+  }) 
 }
 // // Get order by id user
 // exports.getOrders = (req, res) => {
@@ -99,6 +99,37 @@ exports.getRestaurantReadyToGetPaid = (req, res) => {
 
 
 
+exports.addQuestions = (req, res) => {
+  data = req.body;
+  questions ={}
+    //handle type issues
+console.log(req.body)
+console.log(data.question[0])
+
+for (var i=0; i<data.question.length ; i++){
+
+  let question = data.question[0];
+
+  questions.question = question;
+
+  console.log(" Format result ", questions)
+
+  
+        Order.addQuestions(questions, (result) => {
+          if(result){
+            //res.status(200).send(result);
+            console.log(result)
+          }
+          else {
+            //res.status(400).send({result: "can't save new restaurant"});
+                        console.log(result)
+
+          }
+        })    
+}    
+res.status(200).send("success");
+
+}
 
 
 

@@ -1,5 +1,6 @@
 const db = require('../config.js');
 const FicheOrder = require(`../models/ficheOrder.js`);
+const Question = require(`../models/questions.js`);
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -192,3 +193,10 @@ exports.getRestaurantReadyToGetPaid = (cb) => {
 };
 
 
+ // Save questions
+exports.addQuestions = (question, cb) => {
+  new Question({})
+    .save(question, { method: 'insert' })
+    .then((saveQuestions) => cb(saveQuestions))
+    .catch(error => console.log(error))
+}

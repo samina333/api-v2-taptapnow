@@ -161,6 +161,9 @@ app.post('/api/v2/admin/restaurant/user/bank_info/update', auth.validation(), ba
 
 //updation
 app.post('/api/v2/admin/restaurant/all', restaurant.getRestaurant);
+app.post('/api/v2/admin/restaurant/order/addquestions', auth.validation(), order.addQuestions); 
+
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, function() {
