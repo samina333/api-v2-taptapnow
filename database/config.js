@@ -374,7 +374,9 @@ db.knex.schema.hasTable("question").then(function(exists) {
     db.knex.schema
       .createTable("question", function(rest) {
         rest.increments("id_question").primary();
+        
         rest.string("question", 2500);
+
       })
       .then(function(table) {
         console.log(`${table} created`);

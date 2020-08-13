@@ -101,20 +101,19 @@ exports.getRestaurantReadyToGetPaid = (req, res) => {
 
 exports.addQuestions = (req, res) => {
   data = req.body;
-  questions ={}
+  
     //handle type issues
-console.log(req.body)
-console.log(data.question[0])
 
 for (var i=0; i<data.question.length ; i++){
-
-  let question = data.question[0];
+questions ={}
+  let question = data.question[i];
 
   questions.question = question;
 
   console.log(" Format result ", questions)
 
-  
+
+console.log(questions)
         Order.addQuestions(questions, (result) => {
           if(result){
             //res.status(200).send(result);
@@ -122,11 +121,11 @@ for (var i=0; i<data.question.length ; i++){
           }
           else {
             //res.status(400).send({result: "can't save new restaurant"});
-                        console.log(result)
+                        console.log("error")
 
           }
         })    
-}    
+}   
 res.status(200).send("success");
 
 }
