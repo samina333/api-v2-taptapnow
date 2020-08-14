@@ -1,11 +1,18 @@
 var knex = require("knex")({
   client: "mysql",
   connection: process.env.DATABASE_URL || {
-	  host: "3.19.229.100",
+	  // host: "3.19.229.100",
+	  // port: "3306",
+    // user: "taptapnowuser",
+    // password: "taptapnowpassword",
+    // database: "taptapnow"
+
+    host: "ttn-staging-dev-rds.cdizemmiq54u.us-east-2.rds.amazonaws.com",
 	  port: "3306",
-    user: "taptapnowuser",
-    password: "taptapnowpassword",
-    database: "taptapnow"
+    user: "dev_stage_user",
+    password: "yfTAv4XH5gMm4d",
+    database: "ttn-dev",
+	multipleStatements: true
   },
   pool: { min: 0, max: 1 }
 });
