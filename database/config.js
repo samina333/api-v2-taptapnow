@@ -391,6 +391,20 @@ db.knex.schema.hasTable("question").then(function(exists) {
   }
 });
 
+db.knex.schema.hasTable("service_fee").then(function(exists) {
+  if (!exists) {
+    db.knex.schema
+      .createTable("service_fee", function(rest) {
+        rest.increments("id_service").primary();
+        rest.integer("id_restaurant_fk").notNullable();
+        rest.integer("fee").notNullable();
+
+      })
+      .then(function(table) {
+        console.log(`${table} created`);
+      });
+  }
+});
 
 // Comment it cause i have a special mysql compose key on it 
 // db.knex.schema.hasTable("opening_times").then(function(exists) {

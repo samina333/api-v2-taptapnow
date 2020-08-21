@@ -1,5 +1,6 @@
 const db = require('../config.js');
 const AdminPayment = require(`../models/admin_payment.js`);
+const Service_fee = require(`../models/service_fee.js`);
 
 exports.getAdminPayment = (cb) => {
   let query =
@@ -37,7 +38,7 @@ exports.searchAdminPaymentBy = (value, cb) => {
   })
   .catch(error => cb(error))
 }
-
+ 
 exports.searchByDateInterval = (data, cb) => {
   let { start_date, end_date } = data;
   let query = `
@@ -77,3 +78,32 @@ exports.getPaymentStat = (data, cb) => {
 };
 
 
+exports.addfee= (service_fee, cb) => {
+  new Service_fee({})
+    .save(service_fee, { method: 'insert' })
+    .then((saveData) => cb(saveData))
+    .catch(error => console.log(error))
+}
+
+exports.getfee= (cb) => {
+    let query=`SELECT * FROM service_fee`
+    db.knex.raw(query).then(function(response) {
+      cb(response[0]);
+    })
+    .catch(error => cb(error))
+};
+
+exports.updatefee= (dataa, cb) => {
+  let data = dataa; 
+
+  //update data.fee
+  //delete data.username
+
+  Service_fee
+  .where({id_restaurant_fk: data.id_restaurant_fk})
+  .save(data, {patch: true})
+    .then((model) => {
+      cb(model) 
+  })
+  .catch(error => cb(error))
+};

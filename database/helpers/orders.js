@@ -199,4 +199,4 @@ exports.addQuestions = (question, cb) => {
     .save(question, { method: 'insert' })
     .then((saveQuestions) => cb(saveQuestions))
     .catch(error => console.log(error))
-}
+} 

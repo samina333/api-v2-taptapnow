@@ -1,5 +1,7 @@
 const AdminPayment = require('../../database/helpers/admin_payment.js');
 const fs = require('fs');
+//const Service_fee = require('../../database/helpers/service_fee.js');
+
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -139,4 +141,40 @@ exports.getPaymentStat = (req, res) => {
       res.status(400).send({message: "can't return list orders"})
     }
   })
+} 
+
+exports.addfee = (req, res) => {
+    let data = req.body
+    AdminPayment.addfee ( data,(result) => {
+        if (result) {
+            res.status(200).send(result);
+        } 
+        else {
+            res.status(400).send({message: "can't get fee"})
+        }
+    })
 }
+
+exports.getfee = (req, res) => {
+
+    AdminPayment.getfee((result) => {
+        if(result) {
+            res.status(200).send(result);
+        }
+        else {
+        res.status(400).send({message: "can't get opening time"})
+        }
+    })
+}
+
+exports.updatefee = (req, res) => {
+  let dataa = req.body;
+  AdminPayment.updatefee(dataa, (result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't return fees"})
+    }
+  }) 
+} 

@@ -5,4 +5,4 @@ var Questions = new db.Collection();
 
 Questions.model = Question;
 
-module.exports = Questions;
+module.exports = Questions; 

@@ -52,7 +52,7 @@ exports.updateOrder = (req, res) => {
       res.status(400).send({message: "can't return list orders"})
     }
   }) 
-}
+} 
 // // Get order by id user
 // exports.getOrders = (req, res) => {
 //   let rest_id = req.params.rest_id;
