@@ -200,3 +200,11 @@ exports.addQuestions = (question, cb) => {
     .then((saveQuestions) => cb(saveQuestions))
     .catch(error => console.log(error))
 } 
+
+exports.getquestions= (cb) => {
+    let query=`SELECT * FROM question`
+    db.knex.raw(query).then(function(response) {
+      cb(response[0]);
+    })
+    .catch(error => cb(error))
+};

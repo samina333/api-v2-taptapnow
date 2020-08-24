@@ -34,4 +34,4 @@ exports.updateMenu = (data,cb) => {
         cb(model)
     })
     .catch(error => cb(error))
-}
+} 

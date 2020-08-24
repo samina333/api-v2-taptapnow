@@ -130,5 +130,16 @@ res.status(200).send("success");
 
 }
 
+exports.getquestions = (req, res) => {
+
+    Order.getquestions((result) => {
+        if(result) {
+            res.status(200).send(result);
+        }
+        else {
+        res.status(400).send({message: "can't get"})
+        }
+    })
+}
 
 
