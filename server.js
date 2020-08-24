@@ -162,7 +162,7 @@ app.post('/api/v2/admin/restaurant/user/bank_info/update', auth.validation(), ba
 //updation
 app.post('/api/v2/admin/restaurant/all', restaurant.getRestaurant);
 app.post('/api/v2/admin/restaurant/order/addquestions', auth.validation(), order.addQuestions); 
-app.get('/api/v2/admin/restaurant/order/getquestions', auth.validation(), order.getquestions); 
+app.get('/api/v2/admin/restaurant/order/getquestions',  order.getquestions); 
 
 app.post('/api/v2/admin/restaurant/payment/admin/addfee', auth.validation(), admin_payment.addfee);
 app.get('/api/v2/admin/restaurant/payment/admin/getfee', auth.validation(), admin_payment.getfee);
