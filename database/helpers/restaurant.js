@@ -43,7 +43,7 @@ exports.getRestaurantWithOutPagination = (cb) => {
     cb(response[0])
   }).catch(error => cb(error))
 }
-
+ 
 // Count restaurant .. !
 exports.getRestaurantCount = (cb) => {
   let queryCount = `SELECT COUNT(*) as restaurantLength FROM restaurant;`

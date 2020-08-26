@@ -81,6 +81,9 @@ exports.saveRestaurant = (req, res) => {
   let adresse_restaurant = data.adresse_restaurant;
   let zipcode = data.zipcode;
   let state = data.state;
+
+  let delivery_service = data.delivery_service;
+  let delivery_fee = data.delivery_fee;
   
    
   restaurant.adminRestID = user;
@@ -92,6 +95,8 @@ exports.saveRestaurant = (req, res) => {
   restaurant.adresse_restaurant = adresse_restaurant;
   restaurant.zipcode = zipcode;
   restaurant.state = state;
+  restaurant.delivery_service = delivery_service;
+  restaurant.delivery_fee = delivery_fee;
 
   // default value define
   restaurant.email_restaurant = 'service@taptapnow.com';
@@ -159,6 +164,8 @@ exports.updateRestaurant = (req,res) => {
   let zipcode = data.zipcode;
   let state = data.state;
   let tax = data.tax;
+  let delivery_service = data.delivery_service;
+  let delivery_fee = data.delivery_fee;
   let id_restaurant = data.id_restaurant;
 
   restaurant.adminRestID = user;
@@ -171,6 +178,10 @@ exports.updateRestaurant = (req,res) => {
   restaurant.zipcode = zipcode;
   restaurant.state = state;
   restaurant.tax = tax;
+  
+  restaurant.delivery_service = delivery_service;
+  restaurant.delivery_fee = delivery_fee;
+
   restaurant.id_restaurant = id_restaurant
 
   restaurant.open_restaurant = data.open_restaurant;
