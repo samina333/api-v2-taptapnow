@@ -133,3 +133,35 @@ exports.getRestaurantByZip = (data,cb) => {
     cb(response[0])
   }).catch(error => cb(error))
 }
+
+
+exports.alert = (rest_id, cb) => { 
+  // const rest_lat = 0;
+  // const rest_long = 0;
+
+  let query = `
+    SELECT * FROM restaurant , user 
+    WHERE 
+    restaurant.id_restaurant = ${rest_id}
+    AND restaurant.adminRestID = user.id_user
+  `;
+
+  db.knex.raw(query).then(function(response) {
+    //cb(response[0]);
+        console.log(response[0][0].lat_restaurant)
+      const  rest_lat = response[0][0].lat_restaurant;
+      const  rest_long = response[0][0].long_restaurant;
+
+        let query2 = `SELECT *, ( 3959 * acos( cos( radians(lat) ) * cos( radians( ${rest_lat} ) ) * 
+        cos( radians( longit ) - radians(${rest_long}) ) + sin( radians(lat) ) * 
+        sin( radians(${rest_lat} ) ) ) ) AS distance FROM user HAVING distance < 30 ORDER BY distance;`
+
+        db.knex.raw(query2).then(function(response) {
+          cb(response[0]);
+          }).catch(error => cb(error))
+
+
+  }).catch(error => cb(error))
+
+  
+}

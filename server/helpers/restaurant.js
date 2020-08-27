@@ -1,6 +1,73 @@
 const Restaurant = require('../../database/helpers/restaurant.js');
 const fs = require('fs');
 
+
+
+
+// iOS Notification
+sendIosNotifications = (restaurant_token, message) => {
+	var apn = require('apn')
+	var options = {
+		token:{
+			key: '../api-v2-taptapnow/AuthKey_KX7B3GKJ5D.p8',
+			keyId: 'KX7B3GKJ5D',
+			teamId: 'G8538JXDQ3'
+		},
+		production: true
+	}
+
+	var apnProvider = new apn.Provider(options)
+	// let deviceToken = 'f61c70cc1cf5fc54ab047e7897e67c1fb68bb0ed0fc8db7770be7066280ef1e'
+	var note = new apn.Notification()
+	note.expiry = Math.floor(Date.now() / 1000) + 3600
+	note.badge = 1
+	note.sound = "ping.aiff"
+	note.alert = message
+	note.payload = {'messageFrom': 'Special Offer'}
+	note.topic = 'com.axscentgroup.taptapnow'
+		apnProvider.send(note, restaurant_token).then( (response) =>{
+		response.sent.forEach( (token) => {
+			console.log('Notifications Sent')
+        })
+            
+	    response.failed.forEach((failure)=>{
+		if (failure.error)	{
+			console.log('error',error)
+		}else{
+			console.log(failure.status)
+			console.log(failure.response)
+		}
+	})
+})
+}
+
+// Android Notifications
+sendAndroidNotifications =(restaurant_token,messageText)=> {
+	var FCM = require('fcm-node')
+	var serverKey = require('../../taptap-now-1576868620811-firebase-adminsdk-hpzjx-6b74c7244b.json')
+	var fcm = new FCM(serverKey)
+
+	var message = {
+		to: restaurant_token,
+		// collapse_key: 'Tap Tap Now',
+
+		notification: {
+			title: 'Special Offer',
+			body: messageText
+		}
+	}
+
+	fcm.send(message, function(err, response){
+		if(err)	{
+			console.log('Something wrong ->',err)
+		} else{
+			console.log('Notification sent ->',response)
+		}
+	})
+}
+
+
+
 exports.getRestaurant = (req, res) => {
   let data = req.body;
   Restaurant.getRestaurant(data,(result) => {
@@ -270,4 +337,35 @@ exports.getRestaurantByZip = (req, res) => {
   })
 }
 
+exports.alert = (req, res) => {
+  let id = req.body.rest_id;
+  Restaurant.alert(id,(result) => {
+    if(result) {
+      //res.status(200).send(result);
+      
+      console.log(result[0].token_notification )
+     
+      let restaurantToken = result[0].token_notification ;                                
+      
+      if (restaurantToken) {
+        if (restaurantToken.length > 64) {
+          sendAndroidNotifications(restaurantToken, "You have a new order, please process")
+          } else {
+            sendIosNotifications(restaurantToken, "You have a new order, please process")
+            }    
+            }
+            
+                                res.status(200).json({
+                                    "status": 200,
+                                    "success": true,
+                                    "error":null,
+                                    "response": "notification send"
+                                });
+      
+    }
+    else {
+      res.status(400).send({message: "can't fetch restaurants from the server"})
+    }
+  })
+}
 

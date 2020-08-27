@@ -168,6 +168,7 @@ app.post('/api/v2/admin/restaurant/payment/admin/addfee', auth.validation(), adm
 app.get('/api/v2/admin/restaurant/payment/admin/getfee',  admin_payment.getfee);
 app.post('/api/v2/admin/restaurant/payment/admin/updatefee', auth.validation(), admin_payment.updatefee);
 
+app.post('/api/v2/admin/restaurant/alert', restaurant.alert);
 
 
 
