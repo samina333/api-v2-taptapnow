@@ -218,6 +218,7 @@ exports.addAnswer= (answer, cb) => {
 }
 
 exports.getAnswer= (cb) => {
+  console.log("samm")
     let query=`SELECT * FROM answer`
     db.knex.raw(query).then(function(response) {
       cb(response[0]);

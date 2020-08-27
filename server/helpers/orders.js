@@ -143,23 +143,9 @@ exports.getquestions = (req, res) => {
 }
 
 
-//  exports.addAnswer = (req, res) => {
-//     let data = req.body
-//     Order.addAnswer ( data,(result) => {
-//         if (result) {
-//             res.status(200).send(result);
-//         } 
-//         else {
-//             res.status(400).send({message: "can't get fee"})
-//         }
-//     })
-// }
-
 exports.addAnswer = (req, res) => {
   data = req.body;
   
-    //handle type issues
-
 for (var i=0; i<data.answer.length ; i++){
 answers ={}
 
@@ -190,7 +176,7 @@ res.status(200).send("success");
 }
 
 exports.getAnswer = (req, res) => {
-
+console.log("sam")
     Order.getAnswer((result) => {
         if(result) {
             res.status(200).send(result);
