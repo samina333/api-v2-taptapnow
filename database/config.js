@@ -391,6 +391,21 @@ db.knex.schema.hasTable("question").then(function(exists) {
   }
 });
 
+db.knex.schema.hasTable("answer").then(function(exists) {
+  if (!exists) {
+    db.knex.schema
+      .createTable("answer", function(rest) {
+        rest.increments("id_answer").primary();
+        rest.integer("id_question_fk").notNullable();
+        rest.string("answer",2500);
+
+      })
+      .then(function(table) {
+        console.log(`${table} created`);
+      });
+  }
+});
+
 db.knex.schema.hasTable("service_fee").then(function(exists) {
   if (!exists) {
     db.knex.schema

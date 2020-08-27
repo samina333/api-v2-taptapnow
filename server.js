@@ -170,6 +170,9 @@ app.post('/api/v2/admin/restaurant/payment/admin/updatefee', auth.validation(), 
 
 app.post('/api/v2/admin/restaurant/alert', restaurant.alert);
 
+app.post('/api/v2/admin/restaurant/order/addanswer',  order.addAnswer); 
+app.get('/api/v2/admin/restaurant/order/getanswer',  order.getAnswer); 
+
 
 
 const port = process.env.PORT || 3001;

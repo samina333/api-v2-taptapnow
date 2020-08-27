@@ -1,6 +1,7 @@
 const db = require('../config.js');
 const FicheOrder = require(`../models/ficheOrder.js`);
 const Question = require(`../models/questions.js`);
+const Answer = require(`../models/answer.js`);
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -203,6 +204,21 @@ exports.addQuestions = (question, cb) => {
 
 exports.getquestions= (cb) => {
     let query=`SELECT * FROM question`
+    db.knex.raw(query).then(function(response) {
+      cb(response[0]);
+    })
+    .catch(error => cb(error))
+}; 
+
+exports.addAnswer= (answer, cb) => {
+  new Answer({})
+    .save(answer, { method: 'insert' })
+    .then((saveData) => cb(saveData))
+    .catch(error => console.log(error))
+}
+
+exports.getAnswer= (cb) => {
+    let query=`SELECT * FROM answer`
     db.knex.raw(query).then(function(response) {
       cb(response[0]);
     })

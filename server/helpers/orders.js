@@ -143,3 +143,60 @@ exports.getquestions = (req, res) => {
 }
 
 
+//  exports.addAnswer = (req, res) => {
+//     let data = req.body
+//     Order.addAnswer ( data,(result) => {
+//         if (result) {
+//             res.status(200).send(result);
+//         } 
+//         else {
+//             res.status(400).send({message: "can't get fee"})
+//         }
+//     })
+// }
+
+exports.addAnswer = (req, res) => {
+  data = req.body;
+  
+    //handle type issues
+
+for (var i=0; i<data.answer.length ; i++){
+answers ={}
+
+  let answer = data.answer[i];
+  let id_question_fk = data.id_question_fk[i];
+
+  answers.id_question_fk = id_question_fk;
+  answers.answer = answer;
+
+  console.log(" Format result ", answers)
+
+
+console.log(answers)
+        Order.addAnswer(answers, (result) => {
+          if(result){
+            //res.status(200).send(result);
+            console.log(result)
+          }
+          else {
+            //res.status(400).send({result: "can't save new restaurant"});
+                        console.log("error")
+
+          }
+        })    
+}   
+res.status(200).send("success");
+
+}
+
+exports.getAnswer = (req, res) => {
+
+    Order.getAnswer((result) => {
+        if(result) {
+            res.status(200).send(result);
+        }
+        else {
+        res.status(400).send({message: "can't get"})
+        }
+    })
+}
