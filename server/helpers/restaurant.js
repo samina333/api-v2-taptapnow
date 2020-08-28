@@ -2,8 +2,6 @@ const Restaurant = require('../../database/helpers/restaurant.js');
 const fs = require('fs');
 
 
-
-
 // iOS Notification
 sendIosNotifications = (restaurant_token, message) => {
 	var apn = require('apn')
@@ -376,3 +374,4 @@ exports.alert = (req, res) => {
   })
 }
 
+ 
