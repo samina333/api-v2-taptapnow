@@ -60,3 +60,26 @@ exports.bystate = (req, res) => {
     }
   })
 }
+
+exports.getdishes = (req, res) => {
+  Reports.getdishes((result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't fetch"})
+    }
+  })
+}
+
+exports.getdishsales = (req, res) => {
+  let data = req.body;
+  Reports.getdishsales(data,(result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't fetch"})
+    }
+  })
+}

@@ -179,6 +179,8 @@ app.post('/api/v2/admin/restaurant/reports/sales',  reports.sales);
 app.post('/api/v2/admin/restaurant/reports/reviews',  reports.reviews); 
 app.post('/api/v2/admin/restaurant/reports/salesbyzip',  reports.byzip); 
 app.post('/api/v2/admin/restaurant/reports/salesbystate',  reports.bystate); 
+app.get('/api/v2/admin/restaurant/reports/getdishes',  reports.getdishes); 
+app.get('/api/v2/admin/restaurant/reports/getdishesale',  reports.getdishsales); 
 
 
 const port = process.env.PORT || 3001;

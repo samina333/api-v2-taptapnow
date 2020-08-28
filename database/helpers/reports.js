@@ -44,3 +44,20 @@ exports.bystate = (data,cb) => {
     cb(response[0])
   }).catch(error => cb(error))
 }
+
+exports.getdishes = (cb) => {
+    
+  let query = `SELECT * FROM menu`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+}
+
+exports.getdishsales = (data,cb) => {
+      let dishid = data.dishid;
+
+  let query = `SELECT COUNT(*) FROM order_menu WHERE menuorderID = ${dishid};`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+}
