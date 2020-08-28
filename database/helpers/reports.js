@@ -26,3 +26,21 @@ exports.reviews = (cb) => {
     cb(response[0])
   }).catch(error => cb(error))
 }
+
+exports.byzip = (data,cb) => {
+      let zipcode = data.zipcode;
+
+  let query = `select * from restaurant,order_menu where restaurant.zipcode=${zipcode} and order_menu.id_restaurant_fk=id_restaurant`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+}
+
+exports.bystate = (data,cb) => {
+      let state = data.state;
+
+  let query = `select * from restaurant,order_menu where restaurant.state='${state}' and order_menu.id_restaurant_fk=id_restaurant`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+}

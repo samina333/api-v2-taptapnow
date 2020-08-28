@@ -36,3 +36,27 @@ exports.reviews = (req, res) => {
     }
   })
 }
+
+exports.byzip = (req, res) => {
+  let data = req.body;
+  Reports.byzip(data,(result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't fetch"})
+    }
+  })
+}
+
+exports.bystate = (req, res) => {
+  let data = req.body;
+  Reports.bystate(data,(result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't fetch"})
+    }
+  })
+}
