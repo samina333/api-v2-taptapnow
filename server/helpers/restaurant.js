@@ -40,13 +40,11 @@ sendIosNotifications = (restaurant_token, message) => {
 	})
 })
 }
-
-// Android Notifications
-sendAndroidNotifications =(restaurant_token,messageText)=> {
 	var FCM = require('fcm-node')
 	var serverKey = require('../../taptap-now-1576868620811-firebase-adminsdk-hpzjx-6b74c7244b.json')
 	var fcm = new FCM(serverKey)
-
+// Android Notifications
+sendAndroidNotifications =(restaurant_token,messageText)=> {
 	var message = {
 		to: restaurant_token,
 		// collapse_key: 'Tap Tap Now',
@@ -342,18 +340,27 @@ exports.alert = (req, res) => {
   Restaurant.alert(id,(result) => {
     if(result) {
       //res.status(200).send(result);
-      
-      console.log(result[0].token_notification )
+      var tabledata = JSON.stringify(result);
+      var datt = JSON.parse(tabledata);
      
-      let restaurantToken = result[0].token_notification ;                                
-      
-      if (restaurantToken) {
-        if (restaurantToken.length > 64) {
-          sendAndroidNotifications(restaurantToken, "You have a new order, please process")
+      let arr = [];
+          datt.map(sensor => {
+            arr.push(sensor.token_notification);
+            })
+
+     
+      let restaurantToken = arr ;    
+
+      for (let i = 0 ; i<restaurantToken.length ; i++){
+      // if (restaurantToken) {
+
+        if (restaurantToken[i].length > 64) {
+          sendAndroidNotifications(restaurantToken[i], "We have a special deal for you")
           } else {
-            sendIosNotifications(restaurantToken, "You have a new order, please process")
+            sendIosNotifications(restaurantToken[i], "We have a special deal for you")
             }    
-            }
+           // }
+      }
             
                                 res.status(200).json({
                                     "status": 200,
