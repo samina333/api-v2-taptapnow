@@ -240,4 +240,14 @@ exports.deleteUser = (req, res) => {
     }
   });
 }
- 
+
+exports.suspendUser = (req, res) => {
+  let data = req.body
+  User.suspendUser(data, (result)  => {
+    if (result) {
+      res.status(200).send(result);
+    } else {
+      res.status(400).send({ message: "can't delete user" });
+    }
+  });
+}

@@ -48,6 +48,7 @@ app.post('/api/v2/admin/restaurant/setAdmin', auth.validation(), user.setUserAdm
 
 //start updation
 app.post('/api/v2/admin/user/delete', auth.validation(), user.deleteUser);
+app.post('/api/v2/admin/user/suspend', auth.validation(), user.suspendUser);
 
 
 //end

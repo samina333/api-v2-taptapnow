@@ -255,3 +255,12 @@ exports.deleteUser =( data, cb) => {
     cb(response[0])
   }).catch(error => cb(error))
 };
+
+exports.suspendUser =( data, cb) => {
+  let email = data.email;
+  
+  let query = `update  user set user_status = ${0} where email_user="${email}"`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+};
