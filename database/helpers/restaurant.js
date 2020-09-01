@@ -168,7 +168,7 @@ exports.alert = (rest_id, cb) => {
 
 exports.getServicefee = (cb) => {
     
-  let query = `SELECT name_restaurant, service_fee FROM restaurant`;
+  let query = `SELECT id_restaurant, name_restaurant, service_fee FROM restaurant`;
   db.knex.raw(query).then(function (response) {
     cb(response[0])
   }).catch(error => cb(error))
