@@ -165,3 +165,26 @@ exports.alert = (rest_id, cb) => {
 
   
 }
+
+exports.getServicefee = (cb) => {
+    
+  let query = `SELECT name_restaurant, service_fee FROM restaurant`;
+  db.knex.raw(query).then(function (response) {
+    cb(response[0])
+  }).catch(error => cb(error))
+}
+
+exports.updateServicefee= (dataa, cb) => {
+  let data = dataa; 
+
+  //update data.fee
+  //delete data.username
+
+  Restaurant
+  .where({id_restaurant: data.id_restaurant})
+  .save(data, {patch: true})
+    .then((model) => {
+      cb(model) 
+  })
+  .catch(error => cb(error))
+};

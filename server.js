@@ -166,9 +166,9 @@ app.post('/api/v2/admin/restaurant/all', restaurant.getRestaurant);
 app.post('/api/v2/admin/restaurant/order/addquestions', auth.validation(), order.addQuestions); 
 app.get('/api/v2/admin/restaurant/order/getquestions',  order.getquestions); 
 
-app.post('/api/v2/admin/restaurant/payment/admin/addfee', auth.validation(), admin_payment.addfee);
-app.get('/api/v2/admin/restaurant/payment/admin/getfee',  admin_payment.getfee);
-app.post('/api/v2/admin/restaurant/payment/admin/updatefee', auth.validation(), admin_payment.updatefee);
+//app.post('/api/v2/admin/restaurant/payment/admin/addfee', auth.validation(), admin_payment.addfee);
+app.get('/api/v2/admin/restaurant/payment/admin/getfee',  restaurant.getServicefee);
+app.post('/api/v2/admin/restaurant/payment/admin/updatefee', auth.validation(), restaurant.updateServicefee);
 
 app.post('/api/v2/admin/restaurant/alert', restaurant.alert);
 

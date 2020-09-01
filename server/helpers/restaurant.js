@@ -374,4 +374,27 @@ exports.alert = (req, res) => {
   })
 }
 
- 
+exports.getServicefee = (req, res) => {
+
+  Restaurant.getServicefee((result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't fetch restaurants from the server"})
+    }
+  })
+}
+
+exports.updateServicefee = (req, res) => {
+  let dataa = req.body;
+  Restaurant.updateServicefee(dataa, (result) => {
+    if(result) {
+      res.status(200).send(result);
+    }
+    else {
+      res.status(400).send({message: "can't return fees"})
+    }
+  }) 
+} 
+

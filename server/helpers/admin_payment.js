@@ -154,7 +154,7 @@ exports.addfee = (req, res) => {
         }
     })
 }
-
+ 
 exports.getfee = (req, res) => {
 
     AdminPayment.getfee((result) => {
