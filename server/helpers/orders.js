@@ -149,16 +149,17 @@ exports.addAnswer = (req, res) => {
 for (var i=0; i<data.answer.length ; i++){
 answers ={}
 
-  let answer = data.answer[i];
+  
   let id_question_fk = data.id_question_fk[i];
+  let question = data.question[i];
+  let answer = data.answer[i];
 
   answers.id_question_fk = id_question_fk;
+  answers.question = question;
   answers.answer = answer;
 
   console.log(" Format result ", answers)
-
-
-console.log(answers)
+  console.log(answers)
         Order.addAnswer(answers, (result) => {
           if(result){
             //res.status(200).send(result);

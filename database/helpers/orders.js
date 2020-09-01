@@ -216,7 +216,7 @@ exports.addAnswer= (answer, cb) => {
     .then((saveData) => cb(saveData))
     .catch(error => console.log(error))
 }
-
+ 
 exports.getAnswer= (cb) => {
   console.log("samm")
     let query=`SELECT * FROM answer`

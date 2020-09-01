@@ -397,6 +397,7 @@ db.knex.schema.hasTable("answer").then(function(exists) {
       .createTable("answer", function(rest) {
         rest.increments("id_answer").primary();
         rest.integer("id_question_fk").notNullable();
+        rest.string("question",2500);
         rest.string("answer",2500);
 
       })
