@@ -247,7 +247,29 @@ exports.suspendUser = (req, res) => {
     if (result) {
       res.status(200).send(result);
     } else {
-      res.status(400).send({ message: "can't delete user" });
+      res.status(400).send({ message: "can't suspend user" });
+    }
+  });
+}
+
+exports.releaseUser = (req, res) => {
+  let data = req.body
+  User.releaseUser(data, (result)  => {
+    if (result) {
+      res.status(200).send(result);
+    } else {
+      res.status(400).send({ message: "can't release user" });
+    }
+  });
+}
+
+exports.getSuspendeduser = (req, res) => {
+
+  User.getSuspendeduser((result)  => {
+    if (result) {
+      res.status(200).send(result);
+    } else {
+      res.status(400).send({ message: "can't get user" });
     }
   });
 }
