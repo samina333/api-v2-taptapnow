@@ -63,7 +63,6 @@ sendAndroidNotifications =(restaurant_token,messageText)=> {
 }
 
 
-
 exports.getRestaurant = (req, res) => {
   let data = req.body;
   Restaurant.getRestaurant(data,(result) => {

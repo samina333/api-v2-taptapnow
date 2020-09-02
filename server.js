@@ -176,6 +176,7 @@ app.post('/api/v2/admin/restaurant/alert', restaurant.alert);
 
 app.post('/api/v2/admin/restaurant/order/addanswer',  order.addAnswer); 
 app.get('/api/v2/admin/restaurant/order/getanswer',  order.getAnswer); 
+app.get('/api/v2/admin/restaurant/order/getanswer2',  order.getAnswer2); 
 
 app.post('/api/v2/admin/restaurant/reports/logs',  reports.logsCallsandDirections); 
 app.post('/api/v2/admin/restaurant/reports/sales',  reports.sales); 

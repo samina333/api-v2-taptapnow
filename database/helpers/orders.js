@@ -224,4 +224,15 @@ exports.getAnswer= (cb) => {
       cb(response[0]);
     })
     .catch(error => cb(error))
-};
+}; 
+
+exports.getAnswer2= (cb) => {
+  console.log("samm")
+    let query=`SELECT id_question_fk, GROUP_CONCAT(question) questions , GROUP_CONCAT(answer) answers
+FROM answer
+GROUP BY id_question_fk`
+    db.knex.raw(query).then(function(response) {
+      cb(response[0]);
+    })
+    .catch(error => cb(error))
+}; 

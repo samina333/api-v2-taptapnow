@@ -187,3 +187,15 @@ console.log("sam")
         }
     })
 }
+
+exports.getAnswer2 = (req, res) => {
+console.log("sam")
+    Order.getAnswer2((result) => {
+        if(result) {
+            res.status(200).send(result);
+        }
+        else {
+        res.status(400).send({message: "can't get"})
+        }
+    })
+}
