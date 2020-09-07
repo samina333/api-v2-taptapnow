@@ -335,7 +335,7 @@ exports.getRestaurantByZip = (req, res) => {
 exports.alert = (req, res) => {
   let id = req.body.rest_id;
   let message = req.body.message;
-
+console.log(message)
   Restaurant.alert(id,(result) => {
     if(result) {
       //res.status(200).send(result);
