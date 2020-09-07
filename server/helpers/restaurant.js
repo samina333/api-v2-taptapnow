@@ -334,6 +334,8 @@ exports.getRestaurantByZip = (req, res) => {
 
 exports.alert = (req, res) => {
   let id = req.body.rest_id;
+  let message = req.body.message;
+
   Restaurant.alert(id,(result) => {
     if(result) {
       //res.status(200).send(result);
@@ -352,9 +354,9 @@ exports.alert = (req, res) => {
       // if (restaurantToken) {
 
         if (restaurantToken[i].length > 64) {
-          sendAndroidNotifications(restaurantToken[i], "We have a special deal for you")
+          sendAndroidNotifications(restaurantToken[i], message)
           } else {
-            sendIosNotifications(restaurantToken[i], "We have a special deal for you")
+            sendIosNotifications(restaurantToken[i], message)
             }    
            // }
       }
