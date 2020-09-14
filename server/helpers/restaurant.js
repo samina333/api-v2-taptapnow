@@ -228,6 +228,7 @@ exports.updateRestaurant = (req,res) => {
   let tax = data.tax;
   let delivery_service = data.delivery_service;
   let delivery_fee = data.delivery_fee;
+  let stripeId = data.stripeId;
   let id_restaurant = data.id_restaurant;
 
   restaurant.adminRestID = user;
@@ -243,6 +244,7 @@ exports.updateRestaurant = (req,res) => {
   
   restaurant.delivery_service = delivery_service;
   restaurant.delivery_fee = delivery_fee;
+  restaurant.stripeId = stripeId;
 
   restaurant.id_restaurant = id_restaurant
 
