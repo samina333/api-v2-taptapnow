@@ -146,7 +146,7 @@ exports.saveRestaurant = (req, res) => {
 
   let delivery_service = data.delivery_service;
   let delivery_fee = data.delivery_fee;
-  
+  let stripeId = data.stripeId;
    
   restaurant.adminRestID = user;
   restaurant.countryRestID = countryRestID;
@@ -159,6 +159,7 @@ exports.saveRestaurant = (req, res) => {
   restaurant.state = state;
   restaurant.delivery_service = delivery_service;
   restaurant.delivery_fee = delivery_fee;
+  restaurant.stripeId = stripeId;
 
   // default value define
   restaurant.email_restaurant = 'service@taptapnow.com';
