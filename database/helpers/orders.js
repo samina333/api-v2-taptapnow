@@ -50,12 +50,10 @@ exports.getOrderDetails = (order_id, cb) => {
     });
 };
 
-
-
 // get orders base on restaurant id
 exports.updateOrder = (fiche_order, cb) => {
   let data = fiche_order; 
-  sendMailToUserAboutOrderStauts(data);    
+  //sendMailToUserAboutOrderStauts(data);    
 
   delete data.email_user
   delete data.username
@@ -65,10 +63,11 @@ exports.updateOrder = (fiche_order, cb) => {
   .save(data, {patch: true})
     .then((model) => {
       cb(model) 
+  
   })
   .catch(error => cb(error))
 };
-
+ 
 // send email order 
 sendMailToUserAboutOrderStauts = (data) => {
   // console.log('data fro email', data);
@@ -225,7 +224,7 @@ exports.getAnswer= (cb) => {
     })
     .catch(error => cb(error))
 }; 
-
+ 
 exports.getAnswer2= (cb) => {
   console.log("samm")
     let query=`SELECT id_question_fk, GROUP_CONCAT(question) questions , GROUP_CONCAT(answer) answers

@@ -10,7 +10,7 @@ exports.saveMenu = (req, res , cb) => {
       var tmp_path = req.file.path;
       // // set where the file should actually exists - in this case it is in the "menu" directory
       var target_path = req.file.destination+Date.now()+req.file.originalname;      // move the file from the temporary location to the intended location
-     
+     console.log(req.file.destination)
       fs.rename(tmp_path, target_path, function (err) {
           if (err) {
             res.send({response: "can't save"});

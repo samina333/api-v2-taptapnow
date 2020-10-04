@@ -1,6 +1,6 @@
 const Utils = require('../database/utils.js');
 const path = require('path');
-
+ 
 exports.returnStat = (req, res) => {
   Utils.returnStat((result) => {
     if(result) {

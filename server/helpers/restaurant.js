@@ -38,11 +38,13 @@ sendIosNotifications = (restaurant_token, message) => {
 	})
 })
 }
-	var FCM = require('fcm-node')
-	var serverKey = require('../../taptap-now-1576868620811-firebase-adminsdk-hpzjx-6b74c7244b.json')
-	var fcm = new FCM(serverKey)
+	
 // Android Notifications
 sendAndroidNotifications =(restaurant_token,messageText)=> {
+  var FCM = require('fcm-node')
+	var serverKey = require('../../taptap-now-1576868620811-firebase-adminsdk-hpzjx-6b74c7244b.json')
+	var fcm = new FCM(serverKey)
+  
 	var message = {
 		to: restaurant_token,
 		// collapse_key: 'Tap Tap Now',

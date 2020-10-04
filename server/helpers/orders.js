@@ -1,4 +1,72 @@
 const Order = require('../../database/helpers/orders.js');
+const db = require('../../database/config.js');
+
+
+
+// iOS Notification
+sendIosNotifications = (restaurant_token, message) => {
+	var apn = require('apn')
+	var options = {
+		token:{
+			key: '../api-v2-taptapnow/AuthKey_KX7B3GKJ5D.p8',
+			keyId: 'KX7B3GKJ5D',
+			teamId: 'G8538JXDQ3'
+		},
+		production: true
+	}
+
+	var apnProvider = new apn.Provider(options)
+	// let deviceToken = 'f61c70cc1cf5fc54ab047e7897e67c1fb68bb0ed0fc8db7770be7066280ef1e'
+	var note = new apn.Notification()
+	note.expiry = Math.floor(Date.now() / 1000) + 3600
+	note.badge = 1
+	note.sound = "ping.aiff"
+	note.alert = message
+	note.payload = {'messageFrom': 'Special Offer'}
+	note.topic = 'com.axscentgroup.taptapnow'
+		apnProvider.send(note, restaurant_token).then( (response) =>{
+		response.sent.forEach( (token) => {
+			console.log('Notifications Sent')
+        })
+            
+	    response.failed.forEach((failure)=>{
+		if (failure.error)	{
+			console.log('error',error)
+		}else{
+			console.log(failure.status)
+			console.log(failure.response)
+		}
+	})
+})
+}
+	
+
+// Android Notifications
+sendAndroidNotifications =(restaurant_token,messageText)=> {
+  
+const FCM = require('fcm-node')
+const serverKey = require('../../taptap-now-1576868620811-firebase-adminsdk-hpzjx-6b74c7244b.json')
+const fcm = new FCM(serverKey)
+
+	var message = {
+		to: restaurant_token,
+		// collapse_key: 'Tap Tap Now',
+
+		notification: {
+			title: 'Order Update',
+			body: messageText
+		}
+	}
+
+	fcm.send(message, function(err, response){
+		if(err)	{
+			console.log('Something wrong ->',err)
+		} else{
+			console.log('Notification sent ->',response)
+		}
+	})
+}
+
 
 // Get order by restaurantID 
 exports.getOrders = (req, res) => {
@@ -46,7 +114,29 @@ exports.updateOrder = (req, res) => {
   let fiche_order = req.body;
   Order.updateOrder(fiche_order, (result) => {
     if(result) {
-      res.status(200).send(result);
+      
+      let query = `SELECT userFicheID FROM fiche_order where id_fiche= ${req.body.id_fiche}`;
+  db.knex.raw(query).then(function (response) {
+    //cb(response[0])
+    console.log(response[0][0].userFicheID)
+
+    let query2 = `SELECT token_notification FROM user where id_user= ${response[0][0].userFicheID}`;
+  db.knex.raw(query2).then(function (response) {
+    //cb(response[0])
+    console.log(response[0][0].token_notification);
+    restaurantToken = response[0][0].token_notification;
+   if (restaurantToken.length > 64) {
+          sendAndroidNotifications(restaurantToken, req.body.status_fiche)
+          } else {
+            sendIosNotifications(restaurantToken, req.body.status_fiche)
+            }
+res.status(200).send(result);
+  }).catch(error => cb(error))
+
+
+  }).catch(error => cb(error))
+
+
     }
     else {
       res.status(400).send({message: "can't return list orders"})
@@ -187,7 +277,7 @@ console.log("sam")
         }
     })
 }
-
+ 
 exports.getAnswer2 = (req, res) => {
 console.log("sam")
     Order.getAnswer2((result) => {
