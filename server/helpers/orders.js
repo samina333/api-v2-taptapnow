@@ -110,7 +110,7 @@ exports.getOrderDetails = (req, res) => {
 
 
 // Update fiche order 
-exports.updateOrder = (req, res) => {
+exports.updateOrder = (req, res,cb) => {
   let fiche_order = req.body;
   Order.updateOrder(fiche_order, (result) => {
     if(result) {
