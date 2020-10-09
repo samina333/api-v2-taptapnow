@@ -2,7 +2,7 @@ const Order = require('../../database/helpers/orders.js');
 const db = require('../../database/config.js');
 
 
-
+0
 // iOS Notification
 sendIosNotifications = (restaurant_token, message) => {
 	var apn = require('apn')
@@ -126,9 +126,9 @@ exports.updateOrder = (req, res,cb) => {
     console.log(response[0][0].token_notification);
     restaurantToken = response[0][0].token_notification;
    if (restaurantToken.length > 64) {
-          sendAndroidNotifications(restaurantToken, req.body.status_fiche)
+          sendAndroidNotifications(restaurantToken, "your food is ready to pickup")
           } else {
-            sendIosNotifications(restaurantToken, req.body.status_fiche)
+            sendIosNotifications(restaurantToken, "your food is ready to pickup")
             }
 res.status(200).send(result);
   }).catch(error => cb(error))
