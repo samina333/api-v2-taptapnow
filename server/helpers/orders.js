@@ -126,9 +126,9 @@ exports.updateOrder = (req, res,cb) => {
     console.log(response[0][0].token_notification);
     restaurantToken = response[0][0].token_notification;
    if (restaurantToken.length > 64) {
-          sendAndroidNotifications(restaurantToken, "your food is ready to pickup")
+          sendAndroidNotifications(restaurantToken, "Manjé a paré wi/ Food is ready to pick up")
           } else {
-            sendIosNotifications(restaurantToken, "your food is ready to pickup")
+            sendIosNotifications(restaurantToken, "Manjé a paré wi/ Food is ready to pick up")
             }
 res.status(200).send(result);
   }).catch(error => cb(error))
