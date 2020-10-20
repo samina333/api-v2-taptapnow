@@ -1,8 +1,7 @@
 const Order = require('../../database/helpers/orders.js');
 const db = require('../../database/config.js');
+const server = require('../../server.js');
 
-
-0
 // iOS Notification
 sendIosNotifications = (restaurant_token, message) => {
 	var apn = require('apn')
